@@ -23,7 +23,7 @@ c External functions:
 
 	integer, external :: iargc
 	real fldmin, fldmax
-
+        integer(2) :: tt 
 c---------------------------------------------------------------
 c---------------------------------------------------------------
 c
@@ -47,9 +47,10 @@ c
         read(1,end=3333,err=3333) nstep
         read(1) long_name(1:32)
         write(3) nstep
-        write(3) long_name(1:32)
+        write(3) long_name(1:32) 
         print*,long_name(1:32)
         read(long_name,'(8i4)') nx,ny,nz,nsubs,nsubsx,nsubsy,nfields
+!       long_name is given to nx,ny,... 
         read(1) c_dx
         read(1) c_dy
         read(1) c_time
@@ -64,14 +65,21 @@ c
 	  do n=0,nsubs-1
 
 	    if(n.ne.0) then 
-              write(rankchar,'(i4)') n
+              write(rankchar,'(i4)') n 
+!             fileID = n subdomain
               open(2,file=trim(filename)//"_"//trim(adjustl(rankchar)),
      &               status='old',form='unformatted')
-              read(2)
+!             open the nsubdomain file              
+              read(2) !skip nstep
+              read(2) !skip long_name(1:32)
               do i = 1,ifields
-                read(2)
+                read(2) 
+              end do
+              do i=1,3
+                read(2) !skip c_dx c_dy c_time
               end do
               read(2) (byte(k),k=1,nx*ny)
+!             nx*ny = ngridpoints in a subdomain
             else
              read(1) name,blank,long_name,blank,units,blank,c_max,c_min
              write(3) name,blank,long_name,blank,units,blank,c_max,c_min
