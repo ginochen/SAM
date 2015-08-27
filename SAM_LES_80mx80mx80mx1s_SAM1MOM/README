@@ -1,0 +1,19 @@
+--------------------
+ Case Description
+--------------------
+This working directory is for ARM0003 IOP case with a 80mx80mx80m grid of number 1536x1536x110.
+The MICROPHYSICS scheme is SAM1MOM.
+The spin-up time is selected to be 5 days (nstop=86400*5) now (20150824) for time-scales of convective processes.
+
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Notes on log files ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+20150823
+JobID before 5262122 are using nz_gl=185 as the vertical grid number, corrected to nz_gl=110 after 5262122
+
+20150822
+5252527 is a success case, the previous one 5262127 has segmentation fault with the same 'prm' setup, reason might be over-subscription of the CPU? <----------- bad node?
+
+
+
