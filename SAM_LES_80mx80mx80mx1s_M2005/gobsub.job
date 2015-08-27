@@ -1,0 +1,17 @@
+#!/bin/csh
+#
+## LSF batch script to run an MPI application
+#
+#BSUB -W 48:00                 # wall-clock time (hrs:mins)
+#BSUB -n 512                    # number of tasks in job         
+#BSUB -R "span[ptile=16]"      # number of tasks per node
+#BSUB -J mpijob                # job name
+#BSUB -o ARM0003.%J.out         # output file name in which %J is replaced by the job ID
+#BSUB -e ARM0003.%J.err         # error file name in which %J is replaced by the job ID
+#BSUB -q general               # queue
+#BSUB -u gchen@rsmas.miami.edu
+#BSUB -B gchen@rsmas.miami.edu   # recieve email when job starts
+#BSUB -N gchen@rsmas.miami.edu   # recieve email when job ends
+#
+#run the executable
+/share/opt/intel/impi/4.1.1.036/intel64/bin/mpiexec ./SAM_ADV_MPDATA_SGS_TKE_RAD_CAM_MICRO_M2005
